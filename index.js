@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
-
+/**
+ * App
+ */
 class App extends Component {
   constructor() {
     super();
@@ -15,16 +17,23 @@ class App extends Component {
     return (
       <div>
         <TodoList todos={todos}/>
+        <UserInput />
       </div>
     );
   }
 }
+
 const todos = [
         {id: 1, text: 'first'},
         {id: 2, text: 'second'},
         {id: 3, text: 'third'}
 ]
+
+/** 
+ * todo list
+ */
 class TodoList extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -34,13 +43,18 @@ class TodoList extends Component {
     }
   }
   render() {
+    const { todos } = this.props;
     return (
       <div> 
-        <TodoItem text={this.props.todos[0].text}/>
+        {todos.map(({id, text}) => <TodoItem key={id} text={text} />)}
       </div>
     )
   }
 }
+
+/** 
+ * todo Item
+ */
 class TodoItem extends Component {
   constructor(props) {
     super(props);
@@ -68,4 +82,16 @@ class TodoItem extends Component {
     )
   }
 }
+
+class UserInput extends Component {
+  render() {
+    return (
+      <div>
+        <input />
+        <button>add</button>
+      </div>
+    )
+  }
+}
+
 render(<App />, document.getElementById('root'));
