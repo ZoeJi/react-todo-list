@@ -85,13 +85,26 @@ class TodoItem extends Component {
 }
 
 class UserInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    }
+  }
+  
+  onChange = (e) => {
+    this.setState({
+      value: e.target.value
+    })
+  }
   onAdd = () => {
-    this.props.handleAdd("new to do");
+    this.props.handleAdd(this.state.value);
+    this.setState({value: ''});
   }
   render() {
     return (
       <div>
-        <input />
+        <input value={this.state.value} onChange={this.onChange}/>
         <button onClick={this.onAdd}>add</button>
       </div>
     )
