@@ -126,4 +126,4 @@ class UserInput extends Component {
   }
 }
 
-render(<App />, document.getElementById('todo-app'));
+render(<App />, document.getElementById('todo-list'));
