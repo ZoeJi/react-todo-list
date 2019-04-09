@@ -9,39 +9,40 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-
+      todos: [
+        {id: 1, text: 'first'},
+        {id: 2, text: 'second'},
+        {id: 3, text: 'third'}
+      ]
     };
+  }
+
+  handleAdd = (text) => {
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          id: +new Date(),
+          text
+        }
+      ]
+    });
   }
 
   render() {
     return (
       <div>
-        <TodoList todos={todos}/>
-        <UserInput />
+        <TodoList todos={this.state.todos}/>
+        <UserInput handleAdd={this.handleAdd}/>
       </div>
     );
   }
 }
 
-const todos = [
-        {id: 1, text: 'first'},
-        {id: 2, text: 'second'},
-        {id: 3, text: 'third'}
-]
-
 /** 
  * todo list
  */
 class TodoList extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [
-        
-      ]
-    }
-  }
   render() {
     const { todos } = this.props;
     return (
@@ -84,11 +85,14 @@ class TodoItem extends Component {
 }
 
 class UserInput extends Component {
+  onAdd = () => {
+    this.props.handleAdd("new to do");
+  }
   render() {
     return (
       <div>
         <input />
-        <button>add</button>
+        <button onClick={this.onAdd}>add</button>
       </div>
     )
   }
